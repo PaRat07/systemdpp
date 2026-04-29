@@ -10,6 +10,7 @@ option(SYSTEMDPP_ENABLE_TESTING "enables testing" OFF)
 
 if (SYSTEMDPP_ENABLE_TESTING)
     include(CTest)
+    enable_testing()
     add_subdirectory(tests)
 endif()
 
