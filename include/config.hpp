@@ -1,6 +1,7 @@
 #pragma once
 
-#include <optional>
+#include <string>
+#include <vector>
 
 struct Config {
     using ServiceRef = std::string;
@@ -10,11 +11,11 @@ struct Config {
         std::string Description;
         std::string Documentation;
         std::vector<ServiceRef> Requires;
-    } unit;
+    } Unit;
 
     struct Service {
         Command ExecStart;
         Command ExecReload;
         Command ExecStop;
-    } service;
+    } Service;
 };
