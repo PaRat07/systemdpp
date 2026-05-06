@@ -15,9 +15,14 @@ if (SYSTEMDPP_ENABLE_TESTING)
 endif()
 
 add_library(config-loader src/config_loader.cpp)
-target_link_libraries(config-loader PRIVATE reflectcpp::reflectcpp)
+target_link_libraries(config-loader PRIVATE reflectcpp)
 target_include_directories(config-loader PUBLIC include)
 
-add_executable(systemdpp src/main.cpp src/commands.cpp)
-target_link_libraries(systemdpp PRIVATE config-loader)
-target_include_directories(systemdpp PRIVATE include)
+add_executable(systemdpp-daemon src/daemon.cpp src/commands.cpp)
+target_link_libraries(systemdpp-daemon PRIVATE config-loader httplib reflectcpp)
+target_include_directories(systemdpp-daemon PRIVATE include)
+
+add_executable(systemdpp-ctl src/ctl.cpp)
+target_include_directories(systemdpp-daemon PRIVATE include)
+
+

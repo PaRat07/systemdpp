@@ -3,7 +3,7 @@ include(cmake/get_cpm.cmake)
 
 CPMAddPackage("gh:marzer/tomlplusplus#v3.4.0")
 
-set(REFLECTCPP_JSON OFF)
+set(REFLECTCPP_JSON ON)
 set(REFLECTCPP_TOML ON)
 set(REFLECTCPP_USE_STD_EXPECTED ON)
 
@@ -20,3 +20,6 @@ if (SYSTEMDPP_ENABLE_TESTING)
         CPMAddPackage("gh:google/googletest#v1.15.2")
     endif()
 endif()
+
+set(HTTPLIB_COMPILE ON)
+CPMAddPackage("gh:yhirose/cpp-httplib#v0.43.0")
