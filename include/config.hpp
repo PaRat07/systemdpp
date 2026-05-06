@@ -11,7 +11,7 @@ struct Config {
     struct Unit {
         std::optional<std::string> Description;
         std::optional<std::string> Documentation;
-        std::optional<std::vector<ServiceRef>> Requires;
+        std::optional<std::vector<ServiceRef>> Wants;
     } Unit;
 
     struct Service {
