@@ -18,6 +18,6 @@ add_library(config-loader src/config_loader.cpp)
 target_link_libraries(config-loader PRIVATE reflectcpp::reflectcpp)
 target_include_directories(config-loader PUBLIC include)
 
-add_executable(systemdpp src/main.cpp)
+add_executable(systemdpp src/main.cpp src/commands.cpp)
 target_link_libraries(systemdpp PRIVATE config-loader)
 target_include_directories(systemdpp PRIVATE include)
