@@ -8,4 +8,5 @@ TEST(ConfigLoader, Basic) {
   Config conf = LoadConfig(path);
 
   EXPECT_EQ(conf.Unit.Description, "some basic test");
+  EXPECT_EQ(conf.Service.ExecStart, "echo test");
 }

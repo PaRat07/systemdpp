@@ -23,6 +23,7 @@ target_link_libraries(systemdpp-daemon PRIVATE config-loader httplib reflectcpp)
 target_include_directories(systemdpp-daemon PRIVATE include)
 
 add_executable(systemdpp-ctl src/ctl.cpp)
-target_include_directories(systemdpp-daemon PRIVATE include)
+target_include_directories(systemdpp-ctl PRIVATE include)
+target_link_libraries(systemdpp-ctl PRIVATE httplib reflectcpp)
 
 
