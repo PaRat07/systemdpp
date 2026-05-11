@@ -1,0 +1,6 @@
+[Unit]
+Description="service that fails with errr code 42"
+
+[Service]
+ExecStart="exit 42"
+
