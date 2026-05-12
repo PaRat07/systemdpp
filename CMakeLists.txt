@@ -3,7 +3,7 @@ project(sytemdpp)
 
 set(CMAKE_CXX_STANDARD 23)
 
-include(cmake/deps.cmake)
+add_subdirectory(deps)
 
 option(SYSTEMDPP_USE_LOCAL_PKGS OFF)
 option(SYSTEMDPP_ENABLE_TESTING "enables testing" OFF)

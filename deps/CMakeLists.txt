@@ -1,4 +1,7 @@
-include(cmake/get_cpm.cmake)
+cmake_minimum_required(VERSION 3.20)
+project(sytemdpp-deps)
+
+include(get_cpm.cmake)
 
 
 CPMAddPackage("gh:marzer/tomlplusplus#v3.4.0")
