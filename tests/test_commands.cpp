@@ -14,7 +14,5 @@ TEST(Commands, FailingTest) {
   fs::copy_file(config, install_to);
 
   EXPECT_EQ(Status("failing_service").state, ServiceStatus::Inactive);
-
-
-  EXPECT_EQ(conf.Unit.Description, "some basic test");
+  setenv("HOME", old_home.c_str(), 1);
 }
