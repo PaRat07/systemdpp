@@ -26,4 +26,12 @@ add_executable(systemdpp-ctl src/ctl.cpp)
 target_include_directories(systemdpp-ctl PRIVATE include)
 target_link_libraries(systemdpp-ctl PRIVATE httplib reflectcpp)
 
+include(GNUInstallDirs)
 
+install(TARGETS systemdpp-ctl systemdpp-daemon
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+)
+
+install(FILES data/autocomplete/_systemdpp-ctl
+        DESTINATION ${CMAKE_INSTALL_DATADIR}/zsh/site-functions
+)
