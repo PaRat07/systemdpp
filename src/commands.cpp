@@ -1,11 +1,14 @@
 #include <commands.hpp>
+#include <journald.hpp>
 
 #include <config_loader.hpp>
 #include <map>
+#include <format>
 #include <mutex>
 #include <sys/wait.h>
 #include <thread>
 #include <unistd.h>
+#include <fcntl.h>
 
 static Config ResolveService(std::string_view name) {
   using std::filesystem::path;
@@ -67,6 +70,25 @@ void Start(std::vector<std::string> services) {
           };
         }
       } else {
+        #ifdef USE_JOURNALD
+        std::string out_path = std::format("{}/{}.stdout", journald::basedir, name);
+        std::string err_path = std::format("{}/{}.stderr", journald::basedir, name);
+
+        int outfd = open(out_path.c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0644);
+        int errfd = open(err_path.c_str(), O_CREAT | O_WRONLY | O_TRUNC, 0644);
+
+        if (!outfd || !errfd) {
+
+        }
+
+        dup2(outfd, 1);
+        close(outfd);
+
+        dup2(errfd, 2);
+        close(errfd);
+
+        #endif
+
         execlp(config.Service.ExecStart.c_str(), config.Service.ExecStart.c_str(), nullptr);
         std::exit(132);
       }
@@ -91,4 +113,3 @@ void Stop(std::vector<std::string> services) {
     }
   }
 }
-
