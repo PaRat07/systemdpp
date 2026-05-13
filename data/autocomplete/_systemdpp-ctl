@@ -1,0 +1,37 @@
+#compdef systemdpp-ctl
+
+local context state line
+typeset -A opt_args
+
+_services_names() {
+    local -a services
+    [[ -d "${HOME}"/.config/systemdpp ]] || return
+    services=(${(f)$(find "${HOME}"/.config/systemdpp -type f -printf '%f\n')})
+    _describe 'services' services
+}
+
+
+_arguments -C \
+  '1:subcommand:->subcommand' \
+  '*::arg:->args'
+
+
+case "$state" in
+  subcommand)
+    local -a subcommands
+    subcommands=(
+        'start:start a service'
+        'stop:stop a service'
+        'status:view a service status'
+    )
+    _describe 'subcommand' subcommands
+    ;;
+
+  args)
+    case "$words[1]" in
+      start|stop|status)
+        _services_names
+        ;;
+    esac
+    ;;
+esac
