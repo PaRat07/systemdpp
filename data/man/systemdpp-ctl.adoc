@@ -1,0 +1,38 @@
+// Title + Author
+= systemdpp-ctl (1)
+PaRat07+NinVoido
+
+// Doc type
+:doctype: manpage
+:man-linkstyle: yellow R "" ""
+
+== Name
+
+systemdpp-ctl - Control the systemdpp service manager
+
+== Synopsis
+
+*systemdpp-ctl* [*start*|*stop*|*status*|*restart*] _UNIT_ ...
+
+*systemdpp-ctl poweroff*
+
+== Options
+
+*start*::
+start services with their dependencies
+
+*stop*::
+stop services
+
+*status*::
+get a service status
+
+*poweroff*::
+shut the system down
+
+
+== Resources
+
+*Project repo:* https://github.com/NinVoido/systemdpp
+
+
