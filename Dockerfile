@@ -30,4 +30,4 @@ RUN echo -e "autoload -Uz compinit\ncompinit" | tee /etc/zsh/zshrc
 
 COPY --from=builder /app/ /usr/local
 
-ENTRYPOINT ["/usr/local/bin/systemdpp-run"]
+ENTRYPOINT ["/usr/local/bin/_systemdpp-run"]

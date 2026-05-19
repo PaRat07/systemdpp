@@ -5,7 +5,7 @@
 
 int main() {
   if (fork()) {
-    execlp("systemdpp-daemon", "systemdpp-daemon", nullptr);
+    execlp("_systemdpp-daemon", "_systemdpp-daemon", nullptr);
     _exit(1);
   } else {
     execlp("zsh", "zsh", nullptr);

@@ -18,9 +18,9 @@ add_library(config-loader src/config_loader.cpp)
 target_link_libraries(config-loader PRIVATE reflectcpp)
 target_include_directories(config-loader PUBLIC include)
 
-add_executable(systemdpp-daemon src/daemon.cpp src/commands.cpp)
-target_link_libraries(systemdpp-daemon PRIVATE config-loader httplib reflectcpp)
-target_include_directories(systemdpp-daemon PRIVATE include)
+add_executable(_systemdpp-daemon src/daemon.cpp src/commands.cpp)
+target_link_libraries(_systemdpp-daemon PRIVATE config-loader httplib reflectcpp)
+target_include_directories(_systemdpp-daemon PRIVATE include)
 
 add_executable(systemdpp-ctl src/ctl.cpp)
 target_include_directories(systemdpp-ctl PRIVATE include)
@@ -29,11 +29,11 @@ target_link_libraries(systemdpp-ctl PRIVATE httplib reflectcpp)
 add_executable(journaldpp-daemon src/journald.cpp)
 target_include_directories(journaldpp-daemon PRIVATE include)
 
-add_executable(systemdpp-run src/run_systemdpp.cpp)
+add_executable(_systemdpp-run src/run_systemdpp.cpp)
 
 include(GNUInstallDirs)
 
-install(TARGETS systemdpp-ctl systemdpp-daemon journaldpp-daemon systemdpp-run
+install(TARGETS systemdpp-ctl _systemdpp-daemon journaldpp-daemon _systemdpp-run
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 
