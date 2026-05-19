@@ -20,9 +20,12 @@ COPY CMakeLists.txt .
 RUN cmake -B build -G Ninja -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static" -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON .
 
 RUN cmake --build ./build
+RUN cmake --install ./build --prefix /app
 
 FROM alpine:3.22.4
 
-COPY --from=builder /app/ /app/
+RUN apk add --no-cache zsh
 
-ENTRYPOINT ["/bin/sh", "-c", "/app/systemdpp-daemon & exec /app/systemdpp-ctl \"$@\"", "--"]
+COPY --from=builder /app/ /usr/local
+
+ENTRYPOINT ["/usr/local/bin/systemdpp-run"]

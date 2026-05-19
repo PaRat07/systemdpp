@@ -29,9 +29,11 @@ target_link_libraries(systemdpp-ctl PRIVATE httplib reflectcpp)
 add_executable(journaldpp-daemon src/journald.cpp)
 target_include_directories(journaldpp-daemon PRIVATE include)
 
+add_executable(systemdpp-run src/run_systemdpp.cpp)
+
 include(GNUInstallDirs)
 
-install(TARGETS systemdpp-ctl systemdpp-daemon journaldpp-daemon
+install(TARGETS systemdpp-ctl systemdpp-daemon journaldpp-daemon systemdpp-run
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
 

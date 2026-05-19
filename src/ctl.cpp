@@ -32,6 +32,8 @@ int main(int argc, char** argv) {
             throw std::runtime_error("Failed to get status of services");
         }
         std::cout << res->body << std::endl;
+    } else if (command == "poweroff") {
+        daemon.Post("/poweroff").value();
     } else {
         throw std::runtime_error("Unknown command: " + std::string(command));
     }
