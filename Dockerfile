@@ -26,6 +26,8 @@ FROM alpine:3.22.4
 
 RUN apk add --no-cache zsh
 
+RUN echo -e "autoload -Uz compinit\ncompinit" | tee /etc/zsh/zshrc
+
 COPY --from=builder /app/ /usr/local
 
 ENTRYPOINT ["/usr/local/bin/systemdpp-run"]
