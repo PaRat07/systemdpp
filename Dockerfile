@@ -1,6 +1,6 @@
 FROM alpine:3.22.4 AS builder
 
-RUN apk add --no-cache cmake git python3 build-base clang20 ninja
+RUN apk add --no-cache cmake git python3 build-base clang20 ninja asciidoctor
 
 WORKDIR /project
 
@@ -24,7 +24,7 @@ RUN cmake --install ./build --prefix /app
 
 FROM alpine:3.22.4
 
-RUN apk add --no-cache zsh
+RUN apk add --no-cache zsh man-pages mandoc
 
 RUN echo -e "autoload -Uz compinit\ncompinit" | tee /etc/zsh/zshrc
 
