@@ -1,6 +1,6 @@
 FROM alpine:3.22.4 AS builder
 
-RUN apk add --no-cache cmake git python3 build-base clang20 ninja
+RUN apk add --no-cache cmake git python3 build-base clang20 ninja asciidoctor
 
 WORKDIR /project
 
@@ -20,9 +20,14 @@ COPY CMakeLists.txt .
 RUN cmake -B build -G Ninja -DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/app -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static" -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON .
 
 RUN cmake --build ./build
+RUN cmake --install ./build --prefix /app
 
 FROM alpine:3.22.4
 
-COPY --from=builder /app/ /app/
+RUN apk add --no-cache zsh man-pages mandoc
 
-ENTRYPOINT ["/bin/sh", "-c", "/app/systemdpp-daemon & exec /app/systemdpp-ctl \"$@\"", "--"]
+RUN echo -e "autoload -Uz compinit\ncompinit" | tee /etc/zsh/zshrc
+
+COPY --from=builder /app/ /usr/local
+
+ENTRYPOINT ["/usr/local/bin/_systemdpp-run"]

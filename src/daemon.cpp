@@ -26,5 +26,11 @@ int main(int argc, char** argv) {
     resp.set_content(res_body, "application/json");
   });
 
+  svr.Post("/poweroff", [](const httplib::Request& req, httplib::Response& resp) {
+    std::cout << "Power off" << std::endl;
+    throw std::runtime_error("Power off");
+  });
+  svr.set_exception_handler([](const auto& req, auto& res, std::exception_ptr ep) { std::rethrow_exception(ep); });
+
   svr.listen("0.0.0.0", 8080);
 }

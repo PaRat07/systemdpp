@@ -23,6 +23,7 @@ case "$state" in
         'start:start a service'
         'stop:stop a service'
         'status:view a service status'
+        'poweroff:shut the system down'
     )
     _describe 'subcommand' subcommands
     ;;
