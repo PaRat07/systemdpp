@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(sytemdpp-deps)
 
+set(CMAKE_CXX_STANDARD 23)
+
 include(get_cpm.cmake)
 
 
@@ -26,3 +28,8 @@ endif()
 
 set(HTTPLIB_COMPILE ON)
 CPMAddPackage("gh:yhirose/cpp-httplib#v0.43.0")
+
+add_custom_target(deps_cache)
+
+add_dependencies(deps_cache
+        reflectcpp httplib)

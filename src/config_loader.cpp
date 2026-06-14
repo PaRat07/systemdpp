@@ -1,7 +1,6 @@
 #include "config_loader.hpp"
 
 #include <rfl/toml.hpp>
-#include <rfl.hpp>
 
 #include <fstream>
 
