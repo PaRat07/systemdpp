@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 
 TEST(ConfigLoader, Basic) {
-  const std::filesystem::path path = "data/tests/config_test.yaml";
+  const std::filesystem::path path = "data/tests/config_test.toml";
 
   Config conf = LoadConfig(path);
 

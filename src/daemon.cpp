@@ -1,29 +1,22 @@
 #include <httplib.h>
 
-#include <rfl/json.hpp>
-#include <rfl.hpp>
-
-#include <commands.hpp>
-
+#include "daemon_endpoints.hpp"
 
 int main(int argc, char** argv) {
   httplib::Server svr;
 
   svr.Post("/start", [](const httplib::Request& req, httplib::Response& resp) {
-    auto args = rfl::json::read<std::vector<std::string>>(req.body).value();
-    Start(std::move(args));
+    StartEP(req.body);
     resp.set_content("Success", "text/plain");
   });
 
   svr.Post("/stop", [](const httplib::Request& req, httplib::Response& resp) {
-    auto args = rfl::json::read<std::vector<std::string>>(req.body).value();
-    Stop(std::move(args));
+    StopEP(req.body);
     resp.set_content("Success", "text/plain");
   });
 
   svr.Post("/status", [](const httplib::Request& req, httplib::Response& resp) {
-    auto res_body = rfl::json::write(Status(req.body));
-    resp.set_content(res_body, "application/json");
+    resp.set_content(StatusEP(req.body), "application/json");
   });
 
   svr.Post("/poweroff", [](const httplib::Request& req, httplib::Response& resp) {
