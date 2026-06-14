@@ -33,7 +33,7 @@ COPY CMakeLists.txt .
 
 RUN cmake -B build -G FASTBuild -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXE_LINKER_FLAGS="-static" .
 
-RUN cmake --build ./build -- -summary && asdasd
+RUN cmake --build ./build
 RUN cmake --install ./build --prefix /app
 
 FROM alpine:3.22.4
