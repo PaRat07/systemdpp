@@ -18,9 +18,13 @@ add_library(config-loader src/config_loader.cpp)
 target_link_libraries(config-loader PRIVATE reflectcpp)
 target_include_directories(config-loader PUBLIC include)
 
-add_executable(_systemdpp-daemon src/daemon.cpp src/commands.cpp)
-target_link_libraries(_systemdpp-daemon PRIVATE config-loader httplib reflectcpp)
-target_include_directories(_systemdpp-daemon PRIVATE include)
+add_library(commands src/commands.cpp)
+target_link_libraries(commands PRIVATE reflectcpp config-loader)
+target_include_directories(commands PUBLIC include)
+
+add_executable(_systemdpp-daemon src/daemon.cpp src/daemon_endpoints.cpp)
+target_link_libraries(_systemdpp-daemon PRIVATE commands httplib reflectcpp)
+
 
 add_executable(systemdpp-ctl src/ctl.cpp)
 target_include_directories(systemdpp-ctl PRIVATE include)
