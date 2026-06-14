@@ -2,13 +2,6 @@ FROM alpine:3.24.0 AS builder
 
 RUN apk add --no-cache cmake git python3 build-base clang20 ninja asciidoctor gcompat libstdc++
 
-WORKDIR /project
-
-COPY deps deps
-ENV CPM_SOURCE_CACHE=/project/.cache/cpm
-ENV FASTBUILD_CACHE_PATH=/project/.cache/fbuild
-ENV FASTBUILD_CACHE_MODE=rw
-
 RUN wget https://www.fastbuild.org/downloads/v1.20/FASTBuild-Linux-x64-v1.20.zip && unzip FASTBuild-Linux-x64-v1.20.zip -d /opt/fastbuild && \
     rm FASTBuild-Linux-x64-v1.20.zip
 
@@ -16,6 +9,13 @@ RUN chmod +x /opt/fastbuild/fbuild /opt/fastbuild/fbuildworker
 
 RUN ln -s /opt/fastbuild/fbuild /usr/local/bin/fbuild
 RUN ln -s /opt/fastbuild/fbuildworker /usr/local/bin/fbuildworker
+
+WORKDIR /project
+
+COPY deps deps
+ENV CPM_SOURCE_CACHE=/project/.cache/cpm
+ENV FASTBUILD_CACHE_PATH=/project/.cache/fbuild
+ENV FASTBUILD_CACHE_MODE=rw
 
 RUN mkdir -p /project/.cache/fbuild
 
